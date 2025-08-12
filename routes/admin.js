@@ -1,6 +1,6 @@
 const express = require('express');
 const authMiddleware = require('../middleware/auth-middleware');
-const roleMiddleware = require('../middlewares/roleMiddleware');
+const roleMiddleware = require('../middleware/roleMiddleware');
 const router = express.Router();
 
 
@@ -8,8 +8,14 @@ router.get(
     '/dashboard',
     authMiddleware,
     roleMiddleware('admin'),
-    (req, res) => {
-    res.json({ message: 'Welcome, Admin' });
+ async (req, res) => {
+    try {
+      // You can perform any async operations here if needed
+      res.status(200).json({ message: 'Welcome, Admin' });
+    } catch (error) {
+      console.error('Error in /dashboard route:', error);
+      res.status(500).json({ error: 'Server Error. Please try again later.' });
+    }
   }
 )
 

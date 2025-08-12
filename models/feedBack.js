@@ -17,9 +17,10 @@ const feedbackSchema = new mongoose.Schema({
     required: true,
     trim: true
   },
+  image: { type: String },
   type: {
     type: String,
-    enum: ['Bug', 'Feature Request', 'General'],
+    enum: ['Bug', 'Feature Request', 'General','Improvement Suggestion'],
     default: 'General'
   },
   timestamp: {
